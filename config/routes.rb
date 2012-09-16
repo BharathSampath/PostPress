@@ -13,6 +13,10 @@ PostPress::Application.routes.draw do
 
   resources :roles
 
+  get "homepage" => "users#homepage", :as => "homepage"
+  get "register" => "users#register", :as => "register"
+  get "authenticate" => "users#authenticate", :as => "authenticate"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -62,7 +66,7 @@ PostPress::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+   root :to => 'users#homepage'
 
   # See how all your routes lay out with "rake routes"
 

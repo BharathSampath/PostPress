@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     @user = User.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html #
       format.json { render json: @user }
     end
   end
@@ -43,13 +43,21 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
+      session[:user]=@user
+      if(!@user.first_name)
+      format.html {redirect_to :action=> "authenticate"}
       else
-        format.html { render action: "new" }
+      if @user.save
+        session[:id]=@user.id
+        #redirect_to "/posts"
+        format.html { redirect_to "/posts", notice: 'User was successfully created.' }
+        #format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html {redirect_to :action=> "register"}
+        #format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+        end
     end
   end
 
@@ -80,4 +88,39 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def authenticate
+    #@user = User.new(params[:userentry])
+
+    valid_user = User.find(:last,:conditions => ["email = ? and pwd = ?",session[:user].email, session[:user].pwd])
+    #valid_user = User.find(:last,:conditions => ["email = ? and pwd = ?",@user.email, @user.pwd])
+    if valid_user
+      session[:id]=valid_user.id
+      redirect_to "/posts"
+    else
+      reset_session
+      respond_to do |format|
+        format.html { redirect_to :action => "homepage" ,notice: 'Invalid Username/Password.'}
+      end
+    end
+  end
+
+  def register
+    @user = User.new
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @users }
+    end
+  end
+
+  def homepage
+    @user = User.new
+
+    respond_to do |format|
+      format.html # homepage.html.erb
+      format.json { render json: @users }
+    end
+  end
+
 end
