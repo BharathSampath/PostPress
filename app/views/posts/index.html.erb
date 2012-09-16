@@ -8,14 +8,25 @@
     <th></th>
   </tr>
 
-<% @posts.each do |post| %>
-  <tr>
-    <td><%= post.content %></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.content %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td>
+          <% if session[:id] == post.User_id %>
+              <%= link_to 'Edit', edit_post_path(post) %></td>
+          <% else  %>
+              <%=  link_to 'Edit' , "/posts/invalid.html.erb"  %>
+          <% end %>
+          <td>
+            <% if session[:id] == post.User_id %>
+                <%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %>
+            <% else %>
+                <%= link_to 'Destroy', "/posts/invalid.html.erb" %>
+            <% end %>
+          </td>
+          </tr>
+  <% end %>
 </table>
 
 <br />

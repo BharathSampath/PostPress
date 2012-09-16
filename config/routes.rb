@@ -17,6 +17,8 @@ PostPress::Application.routes.draw do
   get "register" => "users#register", :as => "register"
   get "authenticate" => "users#authenticate", :as => "authenticate"
 
+  get "/posts/invalid.html.erb" => "posts#invalid", :as => "invalid"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
