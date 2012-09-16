@@ -7,5 +7,7 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email
   validates_length_of :pwd, :within => 5..40
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
 
 end

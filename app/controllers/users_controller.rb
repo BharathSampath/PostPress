@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       session[:user]=@user
-      if(!@user.first_name)
+      if(!@user.first_name  && !@user.last_name)
       format.html {redirect_to :action=> "authenticate"}
       else
       if @user.save
