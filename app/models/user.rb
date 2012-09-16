@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  has_one :role
-  has_many :posts
-  has_many :comments
-  has_many :postvotes
-  has_many :commentvotes
+  has_one :role, :dependent => :destroy
+  has_many :posts, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+  has_many :postvotes, :dependent => :destroy
+  has_many :commentvotes, :dependent => :destroy
 
   validates_uniqueness_of :email
   validates_length_of :pwd, :within => 5..40

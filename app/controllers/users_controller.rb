@@ -47,6 +47,7 @@ class UsersController < ApplicationController
       if(!@user.first_name  && !@user.last_name)
       format.html {redirect_to :action=> "authenticate"}
       else
+        @user.Role_id=Role.find(:last,:conditions => ["id = ?",0]).id
       if @user.save
         session[:id]=@user.id
         #redirect_to "/posts"
@@ -109,7 +110,7 @@ class UsersController < ApplicationController
     @user = User.new
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # register.html.erb
       format.json { render json: @users }
     end
   end
