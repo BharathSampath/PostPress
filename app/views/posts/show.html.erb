@@ -2,6 +2,8 @@
 
 <p>
   <b>Content:</b>
+  <%= @post.title %>
+  <b>Content:</b>
   <%= @post.content %>
 </p>
 <p>
@@ -9,6 +11,7 @@
   <% if !@comments.nil?  %>
       <% @comments.each do |comment| %>
           &nbsp;&nbsp;&nbsp;
+
           <%=comment.content %>
            <% if comment.user_id == session[:id] %>
               <%= link_to 'Edit', edit_post_comment_path(@post,comment) %>
