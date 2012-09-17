@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(:version => 20120916194653) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "posts", :force => true do |t|
+    t.string   "content"
+    t.string   "title"
+    t.integer  "User_id"
+    t.integer  "Category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "postvotes", :force => true do |t|
     t.integer  "Post_id"
     t.integer  "User_id"

@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Content:</b>
+  <b>Category:</b>
+  <%= Category.find { @post.Category_id  }.name %>
+  <b>Title:</b>
   <%= @post.title %>
   <b>Content:</b>
   <%= @post.content %>
