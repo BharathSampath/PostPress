@@ -1,0 +1,12 @@
+
+
+<p>
+  <b>Content:</b>
+  <%= comment.content %>
+</p>
+
+<p>
+  <%= link_to 'Destroy Comment', [comment.post, comment],
+              :confirm => 'Are you sure?',
+              :method => :delete %>
+</p>

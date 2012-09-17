@@ -10,7 +10,20 @@
       <% @comments.each do |comment| %>
           &nbsp;&nbsp;&nbsp;
           <%=comment.content %>
-          <%= link_to 'Edit', edit_post_path(@comment) %>
+           <% if comment.user_id == session[:id] %>
+              <%= link_to 'Edit', edit_post_comment_path(@post,comment) %>
+           <% else %>
+              <%=  link_to 'Edit', "/comments/invalid.html.erb" %>
+           <% end %>
+
+          <% if comment.user_id == session[:id] %>
+            <%= link_to 'Destroy Comment', [comment.post, comment],
+                      :confirm => 'Are you sure?',
+                      :method => :delete %>
+          <% else %>
+          <%=  link_to 'Destroy Comment', "/comments/invalid.html.erb" %>
+          <% end %>
+
           <% %>
           <br>
       <% end %>
@@ -18,16 +31,7 @@
 </p>
 
 <h2>Add a comment:</h2>
-<%= form_for([@post, @post.comments.build]) do |f| %>
+<%= render "comments/form" %>
 
-    <div class="field">
-      <%= f.label :content %><br />
-      <%= f.text_field :content %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-<% end %>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'All ', posts_path %>
+<%= link_to 'Edit Post', edit_post_path(@post) %> |
+<%= link_to 'All Post ', posts_path %>
