@@ -88,4 +88,5 @@
   <td>  |
 <%= link_to 'All Post ', posts_path %>     |
 <%= link_to 'Vote', new_post_postvote_path(@post)  %>   |
-<%= link_to @display_string, post_postvotes_path(@post) %>
+<%= link_to @display_string, post_postvotes_path(@post) %> |
+    <%= link_to 'Logout', :controller => "users", :action => "logout" %>

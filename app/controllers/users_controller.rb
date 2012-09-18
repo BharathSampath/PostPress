@@ -124,4 +124,8 @@ class UsersController < ApplicationController
     end
   end
 
+  def logout
+    reset_session
+    redirect_to :action => "homepage"
+  end
 end

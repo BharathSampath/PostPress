@@ -12,6 +12,6 @@
 <% end %>
 
 <%= link_to 'All Post ', posts_path %>   |
-<%= link_to 'Back to Post ', post_path(@post.id) %>
-
+<%= link_to 'Back to Post ', post_path(@post.id) %> |
+<%= link_to 'Logout', :controller => "users", :action => "logout" %>
 

@@ -17,6 +17,7 @@ PostPress::Application.routes.draw do
   get "homepage" => "users#homepage", :as => "homepage"
   get "register" => "users#register", :as => "register"
   get "authenticate" => "users#authenticate", :as => "authenticate"
+  get "logout" => "users#logout", :as => "logout"
 
   get "/posts/invalid.html.erb" => "posts#invalid", :as => "invalid"
   get "/comments/invalid.html.erb" => "comments#invalid", :as => "invalid1"
