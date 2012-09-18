@@ -7,7 +7,8 @@ class CommentsController < ApplicationController
 
     @comment.user_id = session[:id]
     @comment.update_attributes(params[:comment])
-
+    @post.updated_at=Time.now
+    @post.update_attributes(params[:post])
 
 
     redirect_to post_path(params[:post_id])
@@ -27,7 +28,8 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.user_id = session[:id]
-
+    @post.updated_at=Time.now
+    @post.update_attributes(params[:post])
     respond_to do |format|
       if  @comment.update_attributes(params[:comment])
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }

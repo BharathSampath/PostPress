@@ -17,8 +17,9 @@ class PostvotesController < ApplicationController
      if @flag == true then
      @postvote = @post.postvotes.create(params[:post])
      @postvote.user_id = session[:id]
-
      @postvote.update_attributes(params[:postvote])
+     @post.updated_at=Time.now
+     @post.update_attributes(params[:post])
      redirect_to @post
      end
 

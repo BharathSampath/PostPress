@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
-    @comments = Comment.find(:all ,:conditions => ["Post_id = ?", params[:id]], :order => "updated_at DESC")
+    @comments = Comment.find(:all ,:conditions => ["Post_id = ?", params[:id]])
     #@comments = Comment.where("Post_id", params[:id])
     respond_to do |format|
       format.html # show.html.erb

@@ -19,6 +19,8 @@ class CommentvotesController < ApplicationController
    @commentvote.user_id = session[:id]
 
    @commentvote.update_attributes(params[:comment])
+   @post.updated_at=Time.now
+   @post.update_attributes(params[:post])
    redirect_to @post
    end
 
