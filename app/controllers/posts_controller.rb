@@ -44,8 +44,8 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-    @post.User_id = session[:id]
-    @post.Category_id = params[:posts]
+    @post.user_id = session[:id]
+    #@post.category_id = params[:posts]
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
