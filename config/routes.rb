@@ -1,8 +1,8 @@
 PostPress::Application.routes.draw do
-  resources :commentvotes
-
   resources :posts do
-    resources :comments
+    resources :comments  do
+      resources :commentvotes
+    end
     resources :postvotes
   end
 

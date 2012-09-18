@@ -21,6 +21,7 @@
               <%=  link_to 'Edit', "/comments/invalid.html.erb" %>
            <% end %>
 
+
           <% if comment.user_id == session[:id] %>
             <%= link_to 'Destroy Comment', [comment.post, comment],
                       :confirm => 'Are you sure?',
@@ -29,7 +30,28 @@
           <%=  link_to 'Destroy Comment', "/comments/invalid.html.erb" %>
           <% end %>
 
-          <% %>
+          <%  @count_comment_likes=0
+              @comment_flag=false
+              @display_comment_string=""
+          %>
+          <%=link_to 'Vote',new_post_comment_commentvote_path(@post,comment) %>
+          <% @commentlikes = Commentvote.find(:all, :conditions => {:comment_id => comment.id}) %>
+          <%      @commentlikes.each do |commentlike|
+                 if commentlike.user_id == session[:id]
+                         @comment_flag=true
+                 end
+                 @count_comment_likes = @count_comment_likes + 1
+                end
+                if @comment_flag == true
+                    @count_comment_likes = @count_comment_likes -1
+                    @display_string = "You and " + @count_comment_likes.to_s + " other people voted"
+                else
+                    @display_string = @count_comment_likes.to_s + " people voted"
+                end
+
+           %>
+          <%= link_to @display_string, post_comment_commentvotes_path(@post,comment) %>
+
           <br>
       <% end %>
   <% end %>

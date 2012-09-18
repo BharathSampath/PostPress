@@ -3,3 +3,7 @@
 <% else %>
 <h1> You cannot vote for your own post</h1>
 <% end %>
+
+<br>
+<%= link_to 'All Post ', posts_path %>   |
+<%= link_to 'Back to Post ', post_path(@post.id) %>

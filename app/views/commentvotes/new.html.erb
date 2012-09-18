@@ -1,5 +1,9 @@
-<h1>New commentvote</h1>
+<% if @display_flag == 0 %>
+    <h1> You have already voted for this comment</h1>
+<% else %>
+    <h1> You cannot vote for your own comment</h1>
+<% end %>
+<br>
+<%= link_to 'All Post ', posts_path %>   |
+<%= link_to 'Back to Post ', post_path(@post.id) %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', commentvotes_path %>

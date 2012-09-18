@@ -1,21 +1,10 @@
-<h1>Listing commentvotes</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @commentvotes.each do |commentvote| %>
-  <tr>
-    <td><%= link_to 'Show', commentvote %></td>
-    <td><%= link_to 'Edit', edit_commentvote_path(commentvote) %></td>
-    <td><%= link_to 'Destroy', commentvote, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<h1> People who have like this comment</h1>
+<% @commentvote.each do |commentvote| %>
+    <% @user = User.find(commentvote.user_id) %>
+    <%= @user.first_name + " " + @user.last_name %><br>
 <% end %>
-</table>
+<br>
 
-<br />
+<%= link_to 'All Post ', posts_path %>   |
+<%= link_to 'Back to Post ', post_path(@post.id) %>
 
-<%= link_to 'New Commentvote', new_commentvote_path %>
