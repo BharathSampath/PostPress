@@ -34,9 +34,30 @@
       <% end %>
   <% end %>
 </p>
+<%   @likes = Postvote.find(:all, :conditions => {:post_id => @post.id})  %>
+<%   @count_likes = 0
+     @flag = false
+     @display_string=""
+%>
+     <% @likes.each do |like| %>
+        <% if like.user_id  == session[:id] %>
+            <% @flag = true %>
+        <% end %>
+        <% @count_likes = @count_likes + 1 %>
+     <% end %>
+
+
+<% if @flag == true %>
+      <% @count_likes = @count_likes -1 %>
+      <% @display_string = "You and " + @count_likes.to_s + " other people voted" %>
+<% else %>
+      <% @display_string = @count_likes.to_s + " people voted" %>
+<% end %>
 
 <h2>Add a comment:</h2>
 <%= render "comments/form" %>
 
 <%= link_to 'Edit Post', edit_post_path(@post) %> |
-<%= link_to 'All Post ', posts_path %>
+<%= link_to 'All Post ', posts_path %>     |
+<%= link_to 'Vote', new_post_postvote_path(@post)  %>   |
+<%= link_to @display_string, post_postvotes_path(@post) %>

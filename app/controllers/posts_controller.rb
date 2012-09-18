@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.find(:all , :order => "updated_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
-    @comments = Comment.find(:all ,:conditions => ["Post_id = ?", params[:id]])
+    @comments = Comment.find(:all ,:conditions => ["Post_id = ?", params[:id]], :order => "updated_at DESC")
     #@comments = Comment.where("Post_id", params[:id])
     respond_to do |format|
       format.html # show.html.erb

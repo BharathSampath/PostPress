@@ -1,10 +1,9 @@
 PostPress::Application.routes.draw do
   resources :commentvotes
 
-  resources :postvotes
-
   resources :posts do
     resources :comments
+    resources :postvotes
   end
 
   resources :categories

@@ -1,21 +1,5 @@
-<h1>Listing postvotes</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @postvotes.each do |postvote| %>
-  <tr>
-    <td><%= link_to 'Show', postvote %></td>
-    <td><%= link_to 'Edit', edit_postvote_path(postvote) %></td>
-    <td><%= link_to 'Destroy', postvote, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<h1> People who have like this post</h1>
+<% @postvote.each do |postvote| %>
+     <% @user = User.find(postvote.user_id) %>
+     <%= @user.first_name %>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Postvote', new_postvote_path %>
