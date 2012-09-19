@@ -24,6 +24,7 @@ PostPress::Application.routes.draw do
   get "/posts/invalid.html.erb" => "posts#invalid", :as => "invalid"
   get "/comments/invalid.html.erb" => "comments#invalid", :as => "invalid1"
   get "edit_comment_path"    => "comments#edit", :as => "edit_comment_path"
+  get "admin" => "users#admin", :as => "admin"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

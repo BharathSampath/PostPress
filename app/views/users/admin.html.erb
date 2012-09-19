@@ -1,0 +1,32 @@
+<h1> Admin </h1>
+ <table>
+   <tr>
+     <td> First Name</td>
+     <td> Last Name</td>
+     <td> Email </td>
+     <td> Password</td>
+     <td> Phone </td>
+     <td> Role</td>
+   </tr>
+<% @user.each do |user| %>
+  <tr>
+    <td>  <%= user.first_name %>  </td>
+    <td> <%= user.last_name %>   </td>
+    <td> <%= user.email %> </td>
+    <td> <%= user.pwd %> </td>
+    <td>  <%= user.phone %>   </td>
+    <% if user.Role_id == 1 %>
+        <td><%= "Admin" %> </td>
+    <% else %>
+        <td><%= "User" %> </td>
+    <% end %>
+    <td> <%=  link_to 'Edit', edit_user_path(user) %></td>
+    <td> <%=  link_to 'Destroy', user ,  :method => "delete" %></td>
+  </tr>
+
+<% end %>
+ </table>
+
+<%= link_to 'Admin', :action => "admin" %>     |
+<%= link_to 'Add Category' , new_category_path %> |
+<%= link_to 'Edit/Delete Categories', categories_path %>

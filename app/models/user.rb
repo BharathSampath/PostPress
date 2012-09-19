@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_one :role, :dependent => :destroy
+  has_one :role
   has_many :posts, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :postvotes, :dependent => :destroy

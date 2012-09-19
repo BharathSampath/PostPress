@@ -24,6 +24,15 @@
   <b>Phone:</b>
   <%= @user.phone %>
 </p>
+<p>
+
+<b>Role:</b>
+<% if @user.Role_id == 1 %>
+    <td><%= "Admin" %> </td>
+<% else %>
+    <td><%= "User" %> </td>
+<% end %>
+</p>
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

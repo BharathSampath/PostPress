@@ -97,7 +97,11 @@ class UsersController < ApplicationController
     #valid_user = User.find(:last,:conditions => ["email = ? and pwd = ?",@user.email, @user.pwd])
     if valid_user
       session[:id]=valid_user.id
+      if valid_user.Role_id == 1
+      redirect_to :action => "admin"
+      else
       redirect_to "/posts"
+      end
     else
       reset_session
       respond_to do |format|
@@ -115,6 +119,7 @@ class UsersController < ApplicationController
     end
   end
 
+
   def homepage
     @user = User.new
 
@@ -127,5 +132,12 @@ class UsersController < ApplicationController
   def logout
     reset_session
     redirect_to :action => "homepage"
+  end
+  def admin
+    @user = User.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @users }
+    end
   end
 end
