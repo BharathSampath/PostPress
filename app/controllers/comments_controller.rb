@@ -17,7 +17,17 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.destroy
-    redirect_to post_path(@post)
+
+    respond_to do |format|
+      if  session[:role] == "admin"
+        format.html { redirect_to :controller => "users" , :action => "admin" }
+        format.json { head :no_content }
+      else
+        format.html {  redirect_to post_path(@post)}
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
   def edit
     @post = Post.find(params[:post_id])

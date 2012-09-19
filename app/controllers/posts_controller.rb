@@ -86,9 +86,15 @@
     @post.destroy
 
     respond_to do |format|
+      if session[:role]  == "admin"
+        format.html { redirect_to :controller => "users" , :action => "admin" }
+        format.json { head :no_content }
+
+      else
       format.html { redirect_to posts_url }
       format.json { head :no_content }
-    end
+      end
+     end
   end
 
 

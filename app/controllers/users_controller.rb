@@ -98,8 +98,10 @@ class UsersController < ApplicationController
     if valid_user
       session[:id]=valid_user.id
       if valid_user.Role_id == 1
+      session[:role]= "admin"
       redirect_to :action => "admin"
       else
+      session[:role]= "user"
       redirect_to "/posts"
       end
     else
@@ -135,6 +137,7 @@ class UsersController < ApplicationController
   end
   def admin
     @user = User.all
+    @post = Post.all
     respond_to do |format|
       format.html
       format.json { render json: @users }

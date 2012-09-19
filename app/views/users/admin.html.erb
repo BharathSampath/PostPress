@@ -1,5 +1,6 @@
 <h1> Admin </h1>
- <table>
+<%= session[:role] %>
+<table>
    <tr>
      <td> First Name</td>
      <td> Last Name</td>
@@ -26,6 +27,57 @@
 
 <% end %>
  </table>
+
+
+<h1> Posts </h1>
+<% @post.each do |post| %>
+
+    <% @comments = Comment.find(:all ,:conditions => ["Post_id = ?", post.id]) %>
+ <b>Title :</b> <%= post.title %>   <br>
+ <b>Content :</b> <%=post.content %>   <br>
+
+ <%= link_to 'Destroy Post', post, :controller => "posts",  :method => "delete" %> <br>
+<% if !@comments.nil?  %>
+    <% @comments.each do |comment| %>
+        &nbsp;&nbsp;&nbsp;
+
+        <%=comment.content %>
+
+
+        <%= link_to 'Destroy Comment', [comment.post, comment],
+                        :confirm => 'Are you sure?',
+                        :method => :delete %>
+
+                 <br>
+   <% end %>
+
+
+        <br>
+    <% end %>
+    <br><br>
+<% end %>
+
+<h1> Post Activity Report</h1>
+<table>
+   <tr>
+     <td> Post Title</td>
+     <td> Post Content</td>
+     <td> # of Votes</td>
+   </tr>
+<% @post.each do |post| %>
+   <tr>
+<%   @likes = Postvote.find(:all, :conditions => {:post_id => post.id})  %>
+<%   @count_likes = 0
+
+%>
+<% @likes.each do |like| %>
+    <% @count_likes = @count_likes + 1 %>
+<% end %>
+   <td><%=post.title%></td>
+   <td><%=post.content%></td>
+   <td><%=@count_likes%></td>
+   </tr>
+<% end %>
 
 <%= link_to 'Admin', :action => "admin" %>     |
 <%= link_to 'Add Category' , new_category_path %> |
