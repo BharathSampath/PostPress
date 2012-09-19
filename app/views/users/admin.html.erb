@@ -1,14 +1,14 @@
 <h1> Admin </h1>
-<%= session[:role] %>
 <table>
    <tr>
-     <td> First Name</td>
-     <td> Last Name</td>
-     <td> Email </td>
-     <td> Password</td>
-     <td> Phone </td>
-     <td> Role</td>
+     <td><b> First Name</td>
+     <td><b> Last Name</td>
+     <td><b> Email </td>
+     <td><b> Password</td>
+     <td><b> Phone </td>
+     <td><b> Role</td>
    </tr>
+  <h2> User Information </h2>
 <% @user.each do |user| %>
   <tr>
     <td>  <%= user.first_name %>  </td>
@@ -28,13 +28,13 @@
 <% end %>
  </table>
 
-
-<h1> Posts </h1>
+<br>
+<h2> Posts and Comments Inforamtion </h2>
 <% @post.each do |post| %>
 
     <% @comments = Comment.find(:all ,:conditions => ["Post_id = ?", post.id]) %>
- <b>Title :</b> <%= post.title %>   <br>
- <b>Content :</b> <%=post.content %>   <br>
+ <b>Title :</b> <%= post.title %>  &nbsp;
+ <b>Content :</b> <%=post.content %>
 
  <%= link_to 'Destroy Post', post, :controller => "posts",  :method => "delete" %> <br>
 <% if !@comments.nil?  %>
@@ -45,7 +45,6 @@
 
 
         <%= link_to 'Destroy Comment', [comment.post, comment],
-                        :confirm => 'Are you sure?',
                         :method => :delete %>
 
                  <br>
@@ -54,15 +53,15 @@
 
         <br>
     <% end %>
-    <br><br>
+    <br>
 <% end %>
 
-<h1> Post Activity Report</h1>
+<h2> Post Activity Report</h2>
 <table>
    <tr>
-     <td> Post Title</td>
-     <td> Post Content</td>
-     <td> # of Votes</td>
+     <td><b> Post Title</td>
+     <td><b> Post Content</td>
+     <td><b> # of Votes</td>
    </tr>
 <% @post.each do |post| %>
    <tr>
@@ -78,7 +77,9 @@
    <td><%=@count_likes%></td>
    </tr>
 <% end %>
+  </table><br>
 
-<%= link_to 'Admin', :action => "admin" %>     |
+
 <%= link_to 'Add Category' , new_category_path %> |
-<%= link_to 'Edit/Delete Categories', categories_path %>
+<%= link_to 'Edit/Delete Categories', categories_path %> |
+<%= link_to 'Logout', :controller => "users", :action => "logout" %>

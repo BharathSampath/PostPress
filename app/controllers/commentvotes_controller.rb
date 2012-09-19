@@ -5,7 +5,7 @@ class CommentvotesController < ApplicationController
    @commentvote = @comment.commentvotes.find(:all, :conditions => {:comment_id => @comment.id})
    @flag = true
    @display_flag=0
-   if @comment.user_id == session[:id]
+   if @comment.user_id == session[:id]  or session[:id].nil?
        @display_flag=1
        @flag = false
    end

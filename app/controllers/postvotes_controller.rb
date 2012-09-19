@@ -4,7 +4,7 @@ class PostvotesController < ApplicationController
      @postvote = @post.postvotes.find(:all, :conditions => {:post_id => @post.id})
      @flag = true
      @display_flag=0
-     if @post.user_id == session[:id]
+     if @post.user_id == session[:id]  or session[:id].nil?
        @flag = false
        @display_flag=1
      end

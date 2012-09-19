@@ -13,19 +13,19 @@
 
   <div class="field">
     <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
+    <%= f.label @user.first_name %>
   </div>
   <div class="field">
     <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
+    <%= f.label @user.last_name %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.text_field :email %>
+    <%= f.label @user.email %>
   </div>
   <div class="field">
     <%= f.label :pwd %><br />
-    <%= f.text_field :pwd %>
+    <%= f.label @user.pwd %>
   </div>
   <div class="field">
     <%= f.label :phone %><br />
@@ -39,5 +39,5 @@
     <%= f.submit %>
   </div>
 
-    <%= link_to 'Posts', posts_path %>
+
 <% end %>
