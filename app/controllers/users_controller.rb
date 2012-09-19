@@ -34,6 +34,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if session[:id].nil? or session[:role]!="admin"
+      redirect_to :action => "homepage"
+    end
     @user = User.find(params[:id])
   end
 
@@ -136,11 +139,15 @@ class UsersController < ApplicationController
     redirect_to :action => "homepage"
   end
   def admin
+    if session[:id].nil? or session[:role]!="admin"
+      redirect_to :action => "homepage"
+    else
     @user = User.all
     @post = Post.all
     respond_to do |format|
       format.html
       format.json { render json: @users }
     end
+      end
   end
 end

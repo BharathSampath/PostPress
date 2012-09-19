@@ -21,11 +21,14 @@
     <td><%= user.phone %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+    <% if session[:id].nil? or session[:role]!="admin" %>
+       <td><%= link_to 'Destroy',:action => "homepage" %></td>
+    <% else %>
+        <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
+    </tr>
 <% end %>
 </table>
-
 <br />
 
 <%= link_to 'New User', new_user_path %> |
