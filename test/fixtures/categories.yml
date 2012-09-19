@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  description: MyString
+  id: 1
+  name: C program
+  description: This post contains discussion about C programming
 
 two:
-  name: MyString
-  description: MyString
+  id: 2
+  name: Java program
+  description: This post contains discussion about C programming

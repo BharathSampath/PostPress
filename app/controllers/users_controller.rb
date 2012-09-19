@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       if(!@user.first_name  && !@user.last_name)
       format.html {redirect_to :action=> "authenticate"}
       else
-        @user.Role_id=Role.find(:last,:conditions => ["id = ?",0]).id
+        @user.Role_id=Role.find(:last,:conditions => ["id = ?",2]).id
       if @user.save
         session[:id]=@user.id
         #redirect_to "/posts"
@@ -72,7 +72,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to :action => "admin", notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

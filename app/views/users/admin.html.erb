@@ -59,6 +59,7 @@
 <h2> Post Activity Report</h2>
 <table>
    <tr>
+     <td><b> Owner</td>
      <td><b> Post Title</td>
      <td><b> Post Content</td>
      <td><b> # of Votes</td>
@@ -67,11 +68,12 @@
    <tr>
 <%   @likes = Postvote.find(:all, :conditions => {:post_id => post.id})  %>
 <%   @count_likes = 0
-
+     @owner=User.find(:last,:conditions => ["id=?",post.user_id])
 %>
 <% @likes.each do |like| %>
     <% @count_likes = @count_likes + 1 %>
 <% end %>
+   <td><%=@owner.email%></td>
    <td><%=post.title%></td>
    <td><%=post.content%></td>
    <td><%=@count_likes%></td>

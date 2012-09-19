@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  user_role: MyString
+  id: 1
+  user_role: admin
 
 two:
-  user_role: MyString
+  id: 2
+  user_role: user

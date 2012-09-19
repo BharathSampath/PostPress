@@ -1,15 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  pwd: MyString
-  phone: MyString
+  id: 1
+  first_name: admin
+  last_name: admin
+  email: admin@postpress.com
+  pwd: admin
+  phone: 9199199191
+  Role_id : 1
 
 two:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  pwd: MyString
-  phone: MyString
+  id: 2
+  first_name: bill
+  last_name: mike
+  email: bill.mike@postpress.com
+  pwd: billmike
+  phone: 9199191111
+  Role_id: 0
