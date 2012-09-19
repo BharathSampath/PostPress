@@ -19,7 +19,7 @@ class SearchesController < ApplicationController
     @content_flag=true
     @s_id = session[:search_id]
 
-    if session[:search_id]== "1" then
+    if session[:search_id]== "User" then
          @user = User.find(:last, :conditions => ["email = ?", @search.content])
          if @user.nil?
            @user_flag=false
@@ -29,7 +29,7 @@ class SearchesController < ApplicationController
          end
     end
 
-    if  session[:search_id] == "2" then
+    if  session[:search_id] == "Category" then
          @category = Category.find(:last, :conditions => ["name = ?",@search.content])
          if @category.nil?
            @category_flag=false
@@ -38,7 +38,7 @@ class SearchesController < ApplicationController
          end
 
     end
-    if session[:search_id] == "3"  then
+    if session[:search_id] == "Content"  then
          @post  = Post.find(:all, :conditions => ["content LIKE ?", "%#{@search.content}%"])
 
          if @post.empty?
