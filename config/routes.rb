@@ -1,4 +1,6 @@
 PostPress::Application.routes.draw do
+  resources :searches
+
   resources :posts
 
   resources :posts do
