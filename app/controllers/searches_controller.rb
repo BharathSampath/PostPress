@@ -1,4 +1,7 @@
 class SearchesController < ApplicationController
+
+  # deals with the searches
+
   # GET /searches
   # GET /searches.json
   def index
@@ -19,36 +22,31 @@ class SearchesController < ApplicationController
     @content_flag=true
     @s_id = session[:search_id]
 
-    if session[:search_id]== "User" then
+    if session[:search_id]== "User" then  # if the search is base on the User?
          @user = User.find(:last, :conditions => ["email = ?", @search.content])
          if @user.nil?
            @user_flag=false
          else
-           # @post  = Post.find(:all, :conditions => ["user_id = ?", @user.id ] )
-           @post  = Post.find(:all, :conditions => ["user_id = ?", @user.id ] )
+           @post  = Post.find(:all, :conditions => ["user_id = ?", @user.id ] )      # get all posts created by the user identified by user's email
          end
     end
 
-    if  session[:search_id] == "Category" then
+    if  session[:search_id] == "Category" then    # if the search is base on the Category?
          @category = Category.find(:last, :conditions => ["name = ?",@search.content])
          if @category.nil?
            @category_flag=false
          else
-            @post = Post.find(:all, :conditions => ["category_id = ?", @category.id ] )
+            @post = Post.find(:all, :conditions => ["category_id = ?", @category.id ] )     # get all posts created identified by post's category
          end
 
     end
-    if session[:search_id] == "Content"  then
-         @post  = Post.find(:all, :conditions => ["content LIKE ?", "%#{@search.content}%"])
+    if session[:search_id] == "Content"  then   # if the search is base on the Content?
+         @post  = Post.find(:all, :conditions => ["content LIKE ?", "%#{@search.content}%"])     # get all posts whose content matches with the string entered
 
          if @post.empty?
            @content_flag=false
          end
     end
-
-
-
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @search }
@@ -76,8 +74,6 @@ class SearchesController < ApplicationController
   def create
     @search = Search.new(params[:search])
     session[:search_id] =  params[:search][:id]
-
-
     respond_to do |format|
       if @search.save
         format.html { redirect_to @search, notice: 'Search was successfully created.' }

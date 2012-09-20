@@ -1,4 +1,7 @@
 class RolesController < ApplicationController
+
+  # deals with the roles(user and admin)
+
   # GET /roles
   # GET /roles.json
   def index

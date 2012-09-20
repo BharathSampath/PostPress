@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+
+  # Deals with users
+
   # GET /users
   # GET /users.json
   def index
     @users = User.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
@@ -47,10 +49,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       session[:user]=@user
-      if(!@user.first_name  && !@user.last_name)
-      format.html {redirect_to :action=> "authenticate"}
+      if(!@user.first_name  && !@user.last_name)    # check the user input to differentiate existing user from new user
+      format.html {redirect_to :action=> "authenticate"}  # redirect to authenticate action for login authentication
       else
-        @user.Role_id=Role.find(:last,:conditions => ["id = ?",2]).id
+        @user.Role_id=Role.find(:last,:conditions => ["id = ?",2]).id   # referes to normal users(not admins)
       if @user.save
         session[:id]=@user.id
         #redirect_to "/posts"
@@ -93,11 +95,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def authenticate
-    #@user = User.new(params[:userentry])
-
+  def authenticate     # action to check user login
     valid_user = User.find(:last,:conditions => ["email = ? and pwd = ?",session[:user].email, session[:user].pwd])
-    #valid_user = User.find(:last,:conditions => ["email = ? and pwd = ?",@user.email, @user.pwd])
     if valid_user
       session[:id]=valid_user.id
       if valid_user.Role_id == 1

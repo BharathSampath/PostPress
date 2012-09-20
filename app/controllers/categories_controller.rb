@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+
+  # deals with the Category operations
+
   # GET /categories
   # GET /categories.json
   def index

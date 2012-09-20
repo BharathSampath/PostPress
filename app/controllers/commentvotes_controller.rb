@@ -1,11 +1,15 @@
 class CommentvotesController < ApplicationController
+
+  # Comment-votes represent the votes on a comment
+
   def new
    @post = Post.find(params[:post_id])
    @comment = Comment.find(params[:comment_id])
    @commentvote = @comment.commentvotes.find(:all, :conditions => {:comment_id => @comment.id})
    @flag = true
    @display_flag=0
-   if @comment.user_id == session[:id]  or session[:id].nil?
+   if @comment.user_id == session[:id]  or session[:id].nil?     # restricts the users to access unauthorized pages by manually typing in the page-link AND
+                                                                 # doesn't allow users to vote for their own comment
        @display_flag=1
        @flag = false
    end
@@ -17,15 +21,13 @@ class CommentvotesController < ApplicationController
    if @flag == true then
    @commentvote = @comment.commentvotes.create(params[:comment])
    @commentvote.user_id = session[:id]
-
    @commentvote.update_attributes(params[:comment])
    @post.updated_at=Time.now
    @post.update_attributes(params[:post])
    redirect_to @post
    end
-
-
   end
+
   def update
     @comment = Comment.find(params[:comment_id])
     @commentvote = @comment.commentvotes.find(params[:comment])
@@ -40,6 +42,7 @@ class CommentvotesController < ApplicationController
       end
     end
   end
+
   def index
     @comment = Comment.find(params[:comment_id])
     @commentvote = @comment.commentvotes.find(:all, :conditions => {:comment_id => @comment.id})

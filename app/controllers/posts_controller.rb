@@ -1,6 +1,10 @@
   class PostsController < ApplicationController
+
+    # deals with Post operation
+
   # GET /posts
   # GET /posts.json
+
   def index
     @posts = Post.find(:all , :order => "updated_at DESC")
 
@@ -14,7 +18,7 @@
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
-    @comments = Comment.find(:all ,:conditions => ["Post_id = ?", params[:id]])
+    @comments = Comment.find(:all ,:conditions => ["Post_id = ?", params[:id]])   # displays all comments that belong to the post
     #@comments = Comment.where("Post_id", params[:id])
     respond_to do |format|
       format.html # show.html.erb
@@ -45,7 +49,6 @@
   def create
     @post = Post.new(params[:post])
     @post.user_id = session[:id]
-    #@post.category_id = params[:posts]
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -75,7 +78,7 @@
 
   # @return [Object]
   def invalid
-
+   # corresponds to a view
   end
 
 

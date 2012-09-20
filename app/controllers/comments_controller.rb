@@ -1,23 +1,21 @@
 class CommentsController < ApplicationController
 
+  # Comments are nested within for each post
+
   def create
     @post = Post.find(params[:post_id])
-    #params[:comment{":user_id"=>:session[:id]}]
     @comment = @post.comments.create(params[:comment])
-
     @comment.user_id = session[:id]
     @comment.update_attributes(params[:comment])
-    @post.updated_at=Time.now
+    @post.updated_at=Time.now                      # function to update the post's timestamp after adding comment
     @post.update_attributes(params[:post])
-
-
     redirect_to post_path(params[:post_id])
   end
+
   def destroy
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.destroy
-
     respond_to do |format|
       if  session[:role] == "admin"
         format.html { redirect_to :controller => "users" , :action => "admin" }
@@ -27,13 +25,13 @@ class CommentsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
-
   end
+
   def edit
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
-
   end
+
   def update
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])

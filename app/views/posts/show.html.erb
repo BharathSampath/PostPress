@@ -22,7 +22,7 @@
            <% end %>
 
 
-          <% if comment.user_id == session[:id] %>
+          <% if comment.user_id == session[:id] %>        # allow owner to delete comments
             <%= link_to 'Destroy Comment', [comment.post, comment],
                       :confirm => 'Are you sure?',
                       :method => :delete %>
@@ -40,11 +40,11 @@
                  if commentlike.user_id == session[:id]
                          @comment_flag=true
                  end
-                 @count_comment_likes = @count_comment_likes + 1
+                 @count_comment_likes = @count_comment_likes + 1          # keep a count of votes
                 end
                 if @comment_flag == true
                     @count_comment_likes = @count_comment_likes -1
-                    @display_string = "You and " + @count_comment_likes.to_s + " other people voted"
+                    @display_string = "You and " + @count_comment_likes.to_s + " other people voted"   # display votes base on user logged in
                 else
                     @display_string = @count_comment_likes.to_s + " people voted"
                 end
